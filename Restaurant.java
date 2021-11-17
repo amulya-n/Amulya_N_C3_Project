@@ -46,7 +46,26 @@ public class Restaurant {
         }
         return null;
     }
+    //This function should return the total cost of the selected menu list by user
+    // For this input will be the list on Menu items
+    //return will be the total cost which is calculated by adding the prices of each menu Item
 
+    //This function should return the total cost of the selected menu list by user
+    // For this input will be the list on Menu items
+    //return will be the total cost which is calculated by adding the prices of each menu Item
+
+    public int returnOrderValue(String[] menuSelected){
+        int totalCost = 0;
+        Item selectedItem;
+
+        for(String name: menuSelected) {
+            selectedItem = findItemByName(name);
+            if(selectedItem != null)
+                totalCost = totalCost + selectedItem.getPrice();
+        }
+        return totalCost;
+    }
+    
     public void addToMenu(String name, int price) {
         Item newItem = new Item(name,price);
         menu.add(newItem);

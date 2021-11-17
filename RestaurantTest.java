@@ -87,5 +87,45 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//<<<<<<<<<<<<<<<<<<<<<<<ORDER COST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //TDD
+    //When the order is calculated for total price , the item must be present in list
+    //for all the item, received in the list , we need to extract the Price
+    // and only return the Total cost to be displayed on the page
+    //therefore we need to implement a method as
+    // selectedItem_received_should_be_present_in_restaurant_menu_and_total_cost_should_not_be_less_than_zero
+    @Test
+    public void selectedItem_received_should_not_be_present_in_restaurant_menu_and_total_cost_should_be_zero(){
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+
+        restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
+        restaurant.addToMenu("Sweet corn soup",119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+
+        String[] selectedItemNames = new String[] {"Soup" ,"Salad"};
+        int totalCostReceived = restaurant.returnOrderValue(selectedItemNames);
+
+        assertEquals(totalCostReceived , 0);
+
+    }
+
+    @Test
+    public void selectedItem_received_should_be_present_in_restaurant_menu_and_total_cost_should_return_a_value(){
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+
+        restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
+        restaurant.addToMenu("Sweet corn soup",119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+
+        String[] selectedItemNames = new String[] {"Sweet corn soup" ,"Vegetable lasagne"};
+        int totalCostReceived = restaurant.returnOrderValue(selectedItemNames);
+
+        assertEquals(totalCostReceived , 388);
+
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<ORDER COST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 }
